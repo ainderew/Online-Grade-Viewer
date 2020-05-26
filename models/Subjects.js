@@ -6,7 +6,11 @@ const Subject = new Schema({
         type: String,
         required: true
     },
+    
+    prerequisites: [String],
+
     students: [{
+        _id: false,
         name: String,
         idNumber: String,
         grade: String

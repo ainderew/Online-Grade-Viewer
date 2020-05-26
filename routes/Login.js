@@ -5,21 +5,19 @@ const studentModel = require("../models/Student");
 
 
 router.post("/", async (req,res) =>{
-    const user  = await studentModel.find({"IdNumber":req.body.idNumber})
+    const user  = await studentModel.findOne({"idNumber":req.body.idNumber})
     const noUser = "no user"
     const wrongPass = "wrong password"
-    if (user.length === 0){
-        console.log(noUser)
+
+    if (user == null){
+        res.json(noUser)// if user does not exist
+        return;
+    }
+
+    if (await bcrypt.compare(req.body.password ,user.password)){
+        res.json(user)
     }else{
-        try{
-            if (await bcrypt.compare(req.body.password ,user[0].password)){
-                res.json(user)
-            }else{
-                res.json(wrongPass)   
-            }
-        }catch(err){
-            console.log(err)
-        }
+        res.json(wrongPass); // if password is wrong
     }
     
     

@@ -25,8 +25,11 @@ app.get("/", (req,res)=>{
 const createStudentRoute = require("./routes/CreateStudent");
 const sudentDatabaseRoute = require("./routes/StudentDatabase")
 const loginRoute = require("./routes/Login");
+const adminRoute = require("./routes/Admin")
 
 app.use("/createStudent", createStudentRoute);
 app.use("/studentDatabase", sudentDatabaseRoute);
-app.use("/Login", loginRoute)
+app.use("/Login", loginRoute);
+app.use("/Admin", adminRoute);
+
 
