@@ -6,14 +6,15 @@ const Subject = new Schema({
         type: String,
         required: true
     },
-    
+    subjectUnits: String,
     prerequisites: [String],
 
     students: [{
         _id: false,
         name: String,
         idNumber: String,
-        grade: String
+        subjectGradeMG: String,
+        subjectGradeFG: String
     }]
 })
 

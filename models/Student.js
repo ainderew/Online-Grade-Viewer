@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const Student = new Schema ({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     idNumber: {
         type: String,
         required: true
@@ -21,12 +24,16 @@ const Student = new Schema ({
     records: [{
         _id : false,
         semester: String,
+        semesterYear: String,
         grades: [{
             _id : false,
             subjectName: String,
-            subjectGrade: String
+            subjectUnits: String,
+            subjectGradeMG: String,
+            subjectGradeFG: String
         }]
     }]
+
 })
 
 const studentSchema = mongoose.model("Student", Student);
