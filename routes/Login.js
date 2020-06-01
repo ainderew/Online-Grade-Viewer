@@ -2,9 +2,15 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const studentModel = require("../models/Student");
+const teacherModel = require("../models/Teacher");
 
 
 router.post("/", loginChecker(studentModel),async(req,res) =>{
+  res.json(res.response)
+  
+    
+})
+router.post("/adminLogin", loginChecker(teacherModel),async(req,res) =>{
   res.json(res.response)
   
     
