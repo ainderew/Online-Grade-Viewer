@@ -13,18 +13,21 @@ router.post("/", loginChecker(studentModel),async(req,res) =>{
 function loginChecker(model){
     return async (req,res,next) => {
         const user  = await model.findOne({"idNumber":req.body.idNumber})
-        const noUser = "no user"
-        const wrongPass = "wrong password"
+        const responseObject = {
+            noUser: "no user",
+            wrongPass:"wrong password"
+        }
 
         if (user == null){
-            res.response = noUser// if user does not exist
+            res.response = responseObject.noUser// if user does not exist
+            next()
             return;
         }
 
         if (await bcrypt.compare(req.body.password ,user.password)){
             res.response = user
         }else{
-            res.response = wrongPass // if password is wrong
+            res.response = responseObject.wrongPass // if password is wrong
         }
         next()
     }
