@@ -23,13 +23,15 @@ app.get("/", (req,res)=>{
 
 //Routes
 const createStudentRoute = require("./routes/CreateStudent");
-const sudentDatabaseRoute = require("./routes/StudentDatabase")
+const sudentDatabaseRoute = require("./routes/StudentDatabase");
 const loginRoute = require("./routes/Login");
-const adminRoute = require("./routes/Admin")
+const adminRoute = require("./routes/Admin");
+const teacherRoute = require("./routes/Teacher");
 
 app.use("/createStudent", createStudentRoute);
-app.use("/studentDatabase", sudentDatabaseRoute);
+app.use("/Students", sudentDatabaseRoute);
 app.use("/Login", loginRoute);
 app.use("/Admin", adminRoute);
+app.use("/Teacher", teacherRoute);
 
 

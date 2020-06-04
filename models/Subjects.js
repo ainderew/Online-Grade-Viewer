@@ -6,16 +6,23 @@ const Subject = new Schema({
         type: String,
         required: true
     },
+    subjectCode: String,
     subjectUnits: String,
-    prerequisites: [String],
-
+    teacher: String,
     students: [{
-        _id: false,
         name: String,
         idNumber: String,
         subjectGradeMG: String,
         subjectGradeFG: String
-    }]
+    }],
+    studentCapacity: String,
+    studentCount: String,
+    subjectSchedule: String,
+    room: String,
+    sectionCode: String,
+    year: String,
+    Semester: String
+    
 })
 
 const subjectSchema = mongoose.model("Subject",Subject);

@@ -25,14 +25,22 @@ const Student = new Schema ({
         _id : false,
         semester: String,
         semesterYear: String,
-        grades: [{
-            _id : false,
-            subjectName: String,
-            subjectUnits: String,
-            subjectGradeMG: String,
-            subjectGradeFG: String
-        }]
-    }]
+        grades: [
+            {
+                _id: false,
+                subjectId: String,
+                subjectName: String
+            }
+            
+            
+        ]
+    }],
+    currentSubjects: [String],
+    
+    accountType: {
+        type: String,
+        default:"student"
+    }
 
 })
 

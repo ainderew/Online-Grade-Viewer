@@ -10,10 +10,8 @@ router.post("/", loginChecker(studentModel),async(req,res) =>{
   
     
 })
-router.post("/adminLogin", loginChecker(teacherModel),async(req,res) =>{
-  res.json(res.response)
-  
-    
+router.post("/teacherLogin", loginChecker(teacherModel),async(req,res) =>{
+  res.json(res.response) 
 })
 
 function loginChecker(model){
@@ -37,9 +35,6 @@ function loginChecker(model){
         }
         next()
     }
-    
-    
-    
 }
 
 module.exports = router;
