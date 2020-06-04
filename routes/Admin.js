@@ -2,21 +2,40 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const Student = require("../models/Student");
-const Subjects = require("../models/Subjects")
+const SubjectSchema = require("../models/Subjects")
 const Course = require("../models/Course")
-const Teacher = require("../models/Teacher")
+const TeacherSchema = require("../models/Teacher")
+const AdminSchema = require("../models/admin")
 
 
 
-router.get("/", (req,res) =>{
-  res.send("admin")
+router.post("/", async (req,res) =>{
+  try{
+    const response = "done";
+    const placeHolder = req.body.password;
+    const hashedPassword = await bcrypt.hash(placeHolder, 10);
+
+    const AdminAccount = new AdminSchema({
+      
+      idNumber: req.body.idNumber,
+      password: hashedPassword,
+      name: req.body.name
+      
+    })
+    AdminAccount.save()
+    res.json(response)
+
+
+  }catch(err){
+    res.json(err)
+  }
 })
 
 router.post("/CreateTeacherAccount", async(req,res) =>{
   const placeHolder = req.body.password;
   const hashedPassword = await bcrypt.hash(placeHolder, 10);
   
-  const TeacherAccount = new Teacher({
+  const TeacherAccount = new TeacherSchema({
     teacherName: req.body.name,
     teacherIdNumber: req.body.idNumber,
     teacherPassword: hashedPassword
@@ -26,7 +45,7 @@ router.post("/CreateTeacherAccount", async(req,res) =>{
 
 })
 router.post("/CreateSubject", async (req,res) =>{
-    const createSubject = new Subjects({
+    const createSubject = new SubjectSchema({
       
       subjectName: req.body.subjectName,
       prerequisites: req.body.prerequisites

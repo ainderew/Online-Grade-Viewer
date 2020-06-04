@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const studentModel = require("../models/Student");
 const teacherModel = require("../models/Teacher");
+const adminModel = require("../models/admin");
 
 
 router.post("/", loginChecker(studentModel),async(req,res) =>{
@@ -11,6 +12,9 @@ router.post("/", loginChecker(studentModel),async(req,res) =>{
     
 })
 router.post("/teacherLogin", loginChecker(teacherModel),async(req,res) =>{
+  res.json(res.response) 
+})
+router.post("/adminLogin", loginChecker(adminModel),async(req,res) =>{
   res.json(res.response) 
 })
 
