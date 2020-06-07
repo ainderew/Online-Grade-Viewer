@@ -8,8 +8,6 @@ const adminModel = require("../models/admin");
 
 router.post("/", loginChecker(studentModel),async(req,res) =>{
   res.json(res.response)
-  
-    
 })
 router.post("/teacherLogin", loginChecker(teacherModel),async(req,res) =>{
   res.json(res.response) 

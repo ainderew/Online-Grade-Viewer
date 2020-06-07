@@ -30,9 +30,7 @@ const Student = new Schema ({
                 _id: false,
                 subjectId: String,
                 subjectName: String
-            }
-            
-            
+            }       
         ]
     }],
     currentSubjects: [String],
