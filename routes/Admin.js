@@ -8,7 +8,7 @@ const TeacherSchema = require("../models/Teacher")
 const AdminSchema = require("../models/admin")
 
 
-
+//create admin account
 router.post("/", async (req,res) =>{
   try{
     const response = "done";
@@ -31,6 +31,7 @@ router.post("/", async (req,res) =>{
   }
 })
 
+
 router.post("/CreateTeacherAccount", async(req,res) =>{
   const placeHolder = req.body.password;
   const hashedPassword = await bcrypt.hash(placeHolder, 10);
@@ -42,17 +43,20 @@ router.post("/CreateTeacherAccount", async(req,res) =>{
   })
   
   TeacherAccount.save()
-
 })
-router.post("/CreateSubject", async (req,res) =>{
-    const createSubject = new SubjectSchema({
-      
-      subjectName: req.body.subjectName,
-      prerequisites: req.body.prerequisites
-      
-    })
 
-    createSubject.save();
+//create a subject
+router.post("/CreateSubject", async (req,res) =>{
+    // const createSubject = new SubjectSchema({
+      
+    //   subjectName: req.body.subjectName,
+    //   prerequisites: req.body.prerequisites
+      
+    // })
+
+    // createSubject.save();
+    const data = req.body.state;
+    res.json(data)
 })
 
 

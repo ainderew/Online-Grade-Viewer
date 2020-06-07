@@ -21,7 +21,8 @@ const Subject = new Schema({
     room: String,
     sectionCode: String,
     year: String,
-    Semester: String
+    semester: String,
+    department: String
     
 })
 
