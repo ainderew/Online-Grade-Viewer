@@ -38,8 +38,8 @@ router.post("/CreateTeacherAccount", async(req,res) =>{
   
   const TeacherAccount = new TeacherSchema({
     teacherName: req.body.name,
-    teacherIdNumber: req.body.idNumber,
-    teacherPassword: hashedPassword
+    idNumber: req.body.idNumber,
+    password: hashedPassword
   })
   
   TeacherAccount.save()
