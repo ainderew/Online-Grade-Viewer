@@ -3,9 +3,10 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const Student = require("../models/Student");
 const SubjectSchema = require("../models/Subjects")
-const Course = require("../models/Course")
+const CourseSchema = require("../models/Course")
 const TeacherSchema = require("../models/Teacher")
 const AdminSchema = require("../models/admin")
+const EnrollmentCodeSchema = require("../models/enrollmentCode")
 
 
 //create admin account
@@ -32,6 +33,7 @@ router.post("/", async (req,res) =>{
 })
 
 
+// CREATE TEACHER ACCOUNT DUH
 router.post("/CreateTeacherAccount", async(req,res) =>{
   const placeHolder = req.body.password;
   const hashedPassword = await bcrypt.hash(placeHolder, 10);
@@ -59,13 +61,13 @@ router.post("/CreateSubject", async (req,res) =>{
     res.json(data)
 })
 
-
+//CREATE A COURSE
 router.get("/CreateCourse", async (req,res) =>{
   const onbject = {}
   onbject.Semester = "First"
   onbject.Subjects = ["Subject1","Subject2","Subject3","Subject4"]
 
-  const newCourse = new Course({
+  const newCourse = new CourseSchema({
     courseName: "test1",
     courseSubjects: onbject,
     courseTotalUnit: "2"
@@ -77,6 +79,20 @@ router.get("/CreateCourse", async (req,res) =>{
 
 })
 
+router.post("/loginEnrollmentCode", async (req,res) =>{
+  let NEW_CODE = await EnrollmentCodeSchema.findOne().sort({_id: -1})
 
+  if (NEW_CODE !== null){
+    await EnrollmentCodeSchema.updateOne({ _id:NEW_CODE._id },{ $set: {code:req.body.code} })
+
+  }else{
+    const newEnrollmentCode = new EnrollmentCodeSchema({
+      code: req.body.code
+    })
+    newEnrollmentCode.save()
+  }
+  
+  res.json("Code Set")
+})
 module.exports = router;
 

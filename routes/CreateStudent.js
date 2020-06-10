@@ -5,6 +5,7 @@ const StudentSchema = require("../models/Student");
 const CourseSchema = require("../models/Course");
 const SubjectSchema = require("../models/Subjects");
 const GradesSchema = require("../models/grades");
+const EnrollmentCodeSchema = require("../models/enrollmentCode");
 
 router.post("/", async (req,res) =>{
     //ID NUMBER MAKER AND PASSWORD HASHING
@@ -17,7 +18,7 @@ router.post("/", async (req,res) =>{
 
 
     //FIND COURSE AND ASSIGN SUBJECTS TO STUDENT
-    const current = new Date;
+    const current = new Date();
     const STUDENT_COURSE = await CourseSchema.findOne({courseName: req.body.course})
     const currentSubjectsField = [] //create array to store subject array with blank grades (the grades field for the student is an array of objects. This stores the objects)
 
@@ -48,6 +49,7 @@ router.post("/", async (req,res) =>{
     // the student schema has a semester(String), and grades(an array of objects [gradesField])
     const gradesField = [];
     
+    //ASSIGNING THE GRADE ID TO THE STUDENT
     for( let subject of currentSubjectsField){
         const GRADE_ID = await GradesSchema.findOne({
             subjectName: subject,
@@ -103,5 +105,10 @@ router.get("/NewSemester", async (req,res)=>{
     res.send("saved")
 })
 
+
+router.post("/checkCode", async (req,res)=>{
+    const data = await EnrollmentCodeSchema.findOne({code: req.body.code})
+    res.json(data)
+})
 
 module.exports = router;
