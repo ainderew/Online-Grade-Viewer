@@ -108,7 +108,7 @@ router.get("/NewSemester", async (req,res)=>{
 
 router.post("/checkCode", async (req,res)=>{
     const data = await EnrollmentCodeSchema.findOne({code: req.body.code})
-    res.json(data)
+    res.json("done")
 })
 
 
