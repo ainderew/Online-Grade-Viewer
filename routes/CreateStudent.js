@@ -111,4 +111,25 @@ router.post("/checkCode", async (req,res)=>{
     res.json(data)
 })
 
+
+router.post("/enrollmentForm", async (req,res) =>{
+    try{
+        const hashedPassword = await bcrypt.hash(req.body.idNumber, 10)
+        const newStudent = new StudentSchema({
+            
+            name: req.body.name,
+            idNumber: req.body.idNumber,
+            course: req.body.course,
+            yearLevel: req.body.yearLevel,
+            password: hashedPassword,
+        
+            
+        })
+        newStudent.save()
+        res.json("student enrolled")
+    }catch(err){
+        res.json(err.message)
+    }
+})
+
 module.exports = router;
